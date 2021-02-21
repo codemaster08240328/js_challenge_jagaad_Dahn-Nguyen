@@ -1,6 +1,6 @@
 # jagaad-fe-challenge
 
-## Build Setup
+## How to run locally
 
 ```bash
 # install dependencies
@@ -9,12 +9,15 @@ $ yarn install
 # serve with hot reload at localhost:3000
 $ yarn dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Production build using Docker.
+
+```bash
+
+$ docker build -t jagaad-fe .
+$ docker run -it -p 3000:3000 jagaad-fe
+
+```
+
+You can see the project running on localhost:3000
