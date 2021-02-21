@@ -4,20 +4,20 @@
       <div class="card-content">
         <div class="content has-text-centered">
           <img :src="product.cover_image_url" :alt="product.title">
-          <p class="card-header-title">
+          <p class="card-header-title" id="card-title">
             {{product.title}}
           </p>
-          <p>
+          <p id="card-description">
             {{product.description}}
           </p>
           <div class="columns is-mobile">
             <div class="column auto"></div>
-            <div v-if="product.discount > 0" class="column stroke-text is-one-third-mobile">{{product.original_retail_price.formatted_value}}</div>
-            <div class="column is-one-third-mobile">{{product.retail_price.formatted_value}}</div>
+            <div v-if="product.discount > 0" class="column stroke-text is-one-third-mobile" id="card-net_price">{{product.original_retail_price.formatted_value}}</div>
+            <div class="column is-one-third-mobile" id="card-retail_price">{{product.retail_price.formatted_value}}</div>
             <div class="column auto"></div>
           </div>
         </div>
-        <div class="add-whilst-wrapper" @click="toggleWishlist(product.uuid)">
+        <div class="add-whilst-wrapper" id="wishlist-wrapper" @click="toggleWishlist(product.uuid)">
           <whilst-icon :isActive="productsInWishlist.includes(product.uuid)" />
         </div>
       </div>
@@ -45,10 +45,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue, Prop } from 'nuxt-property-decorator';
 import { mapMutations } from 'vuex';
 import WhilstIcon from '~/components/WhilstIcon.vue';
-import { TProductItem } from '~/types/product.type'
+import { TProductItem } from '~/types/product.type';
 
 const defaultProductInfo = {
   uuid: '',
@@ -64,11 +64,13 @@ const defaultProductInfo = {
     formatted_value: '$ 0',
   },
   cover_image_url: ''
-}
+};
 
 @Component({components: { WhilstIcon }})
 export default class CardComponent extends Vue {
-  @Prop({default: defaultProductInfo})
+  @Prop({default() {
+    return defaultProductInfo;
+  }})
   product: TProductItem | undefined
 
   get productsInWishlist() {

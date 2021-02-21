@@ -1,4 +1,4 @@
-type TBagItem = {
+export type TBagItem = {
   img: string;
   title: string;
   count: number;

@@ -33,13 +33,12 @@ import { Component, Vue, Watch } from 'nuxt-property-decorator';
 import { mapMutations } from 'vuex';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import Card from '~/components/Card.vue';
-import Pagination from '~/components/Pagination.vue';
 import { TProductItem } from '~/types/product.type';
 import { BACKEND_URL, COUNT_PER_PAGE } from '~/utils/constant';
 
 type TAsyncDataParam = { $axios: NuxtAxiosInstance };
 
-@Component({components: { Card, Pagination }})
+@Component({components: { Card }})
 export default class HomePage extends Vue {
   page: number = 1;
   loading: boolean = false;

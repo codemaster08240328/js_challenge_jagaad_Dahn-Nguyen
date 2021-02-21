@@ -8,8 +8,8 @@
     >
       <img :src="`${cart.img}?q=60&fit=crop&w=60&h=60`" alt="">
       <div style="margin: 0 5px;">
-        <p><b>{{cart.title}}</b></p>
-        <p>€ {{cart.price}} * {{cart.count}} </p>
+        <p><b id="item-title">{{cart.title}}</b></p>
+        <p id="item-price">€ {{cart.price}} * {{cart.count}} </p>
       </div>
       <div
         @click="removeItemBag(cart)"
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="total-price-wrapper">
+    <div class="total-price-wrapper" id="total-price">
       Total Price: € {{cartPrice}}
     </div>
   </div>
