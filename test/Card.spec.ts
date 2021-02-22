@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Card from '@/components/Card.vue';
 import Buefy from 'buefy';
 import { TProductItem } from '~/types/product.type';
+import expect from 'expect';
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -42,7 +43,7 @@ describe('Card Component', () => {
     const wrapper = shallowMount(Card, {
       store, localVue, propsData: {product: props}
     });
-    expect(wrapper.vm).toBeTruthy();
+
     expect(wrapper.find('#card-title').text()).toEqual(props.title);
     expect(wrapper.find('#card-description').text()).toEqual(props.description);
     expect(wrapper.find('#card-retail_price').text()).toEqual(props.retail_price.formatted_value);

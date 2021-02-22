@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import MiniBag from '@/components/MiniBag.vue';
 import Buefy from 'buefy';
 import { TBagItem } from '~/store';
+import expect from 'expect';
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

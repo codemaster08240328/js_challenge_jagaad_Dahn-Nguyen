@@ -17,11 +17,11 @@
         <div>
           <span style="margin-right: 3px; font-size: 14px; color: white;">€ {{cartTotalPrice}}</span>
           <img src="~/assets/bag.svg" alt="bag" @click="show=!show">
-          <span class="span-count">{{productsInBags.length}}</span>
+          <span class="span-count" id="bag-counter">{{productsInBags.length}}</span>
         </div>
         <div>
           <img src="~/assets/wishlist.svg" alt="bag">
-          <span class="span-count">{{productsInWishlist.length}}</span>
+          <span class="span-count" id="wishlist-counter">{{productsInWishlist.length}}</span>
         </div>
       </div>
     </nav>

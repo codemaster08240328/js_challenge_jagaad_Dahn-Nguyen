@@ -8,7 +8,7 @@
     </div>
     <div v-else class="columns is-mobile">
       <div v-for="product in products" :key="product.uuid" class="column is-one-third-widescreen is-half-tablet is-full-mobile" >
-        <card  :product="product" />
+        <card  :product="product" class="card-component" />
       </div>
     </div>
     <div>

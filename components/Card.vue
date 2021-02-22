@@ -34,6 +34,7 @@
             v-else
             class="button is-rounded is-fullwidth"
             @click="addProductToBag(product)"
+            id="add-cart-button"
           >
             Add to cart
           </b-button>
