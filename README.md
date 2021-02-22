@@ -1,5 +1,8 @@
 # jagaad-fe-challenge
 
+Project is hosted here.
+http://narrow-hate.surge.sh/
+
 ## How to run locally
 
 It requires React 15.6.0.
