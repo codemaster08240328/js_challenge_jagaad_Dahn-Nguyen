@@ -17,8 +17,8 @@
             <div class="column auto"></div>
           </div>
         </div>
-        <div class="add-whilst-wrapper" id="wishlist-wrapper" @click="toggleWishlist(product.uuid)">
-          <whilst-icon :isActive="productsInWishlist.includes(product.uuid)" />
+        <div v-if="componentMounted" class="add-whilst-wrapper" id="wishlist-wrapper" @click="toggleWishlist(product.uuid)">
+          <whilst-icon :is-active="productsInWishlist.includes(product.uuid)" />
         </div>
       </div>
       <footer class="card-footer">
@@ -71,8 +71,13 @@ const defaultProductInfo = {
 export default class CardComponent extends Vue {
   @Prop({default() {
     return defaultProductInfo;
-  }})
-  product: TProductItem | undefined
+  }}) product: TProductItem | undefined
+
+  componentMounted = false; // true once component rendered. used to avoid ssr for specific component like img.
+
+  mounted() {
+    this.componentMounted = true;
+  }
 
   get productsInWishlist() {
     return this.$store.state.wishlist;

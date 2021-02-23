@@ -15,7 +15,7 @@
       </div>
       <div class="jagaad-navbar-action">
         <div>
-          <span style="margin-right: 3px; font-size: 14px; color: white;">€ {{cartTotalPrice}}</span>
+          <span style="margin-right: 3px; font-size: 14px; color: white;">€ {{handlingPrice(cartTotalPrice)}}</span>
           <img src="~/assets/bag.svg" alt="bag" @click="show=!show">
           <span class="span-count" id="bag-counter">{{productsInBags.length}}</span>
         </div>
@@ -39,6 +39,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator';
 import Minibag from '~/components/MiniBag.vue';
+import { handlingPrice } from '~/utils/helper';
 
 @Component({components: { Minibag }})
 export default class Layout extends Vue {
@@ -54,6 +55,10 @@ export default class Layout extends Vue {
 
   get cartTotalPrice() {
     return this.$store.state.cartPrice;
+  }
+
+  handlingPrice(price: number) {
+    return handlingPrice(price);
   }
 }
 </script>
@@ -105,7 +110,7 @@ export default class Layout extends Vue {
 }
 
 .minibag-wrapper {
-  position: fixed;
+  position: absolute;
   top: 55px;
   width: 300px;
   right: 20px;

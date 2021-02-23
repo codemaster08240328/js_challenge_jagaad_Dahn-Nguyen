@@ -9,7 +9,7 @@
       <img :src="`${cart.img}?q=60&fit=crop&w=60&h=60`" alt="">
       <div style="margin: 0 5px;">
         <p><b id="item-title">{{cart.title}}</b></p>
-        <p id="item-price">€ {{cart.price}} * {{cart.count}} </p>
+        <p id="item-price">€ {{handlingPrice(cart.price)}} * {{cart.count}} </p>
       </div>
       <div
         @click="removeItemBag(cart)"
@@ -17,18 +17,21 @@
         <b-icon
           icon="close"
           size="is-small"
+          type="is-danger"
         />
       </div>
     </div>
 
     <div class="total-price-wrapper" id="total-price">
-      Total Price: € {{cartPrice}}
+      Total Price: € {{handlingPrice(cartPrice)}}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue, Prop } from 'nuxt-property-decorator';
+import { handlingPrice } from '~/utils/helper';
+
 
 @Component
 export default class CardComponent extends Vue {
@@ -41,8 +44,11 @@ export default class CardComponent extends Vue {
   }
 
   removeItemBag(product: any) {
-    console.log('clicked!!')
     this.$store.commit('removeBag', product)
+  }
+
+  handlingPrice(price: number) {
+    return handlingPrice(price);
   }
 }
 </script>
