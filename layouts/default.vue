@@ -15,13 +15,19 @@
       </div>
       <div class="jagaad-navbar-action">
         <div>
-          <span style="margin-right: 3px; font-size: 14px; color: white;">€ {{handlingPrice(cartTotalPrice)}}</span>
-          <img src="~/assets/bag.svg" alt="bag" @click="show=!show">
-          <span class="span-count" id="bag-counter">{{productsInBags.length}}</span>
+          <span style="margin-right: 3px; font-size: 14px; color: white"
+            >€ {{ handlingPrice(cartTotalPrice) }}</span
+          >
+          <img src="~/assets/bag.svg" alt="bag" @click="show = !show" />
+          <span id="bag-counter" class="span-count">{{
+            productsInBags.length
+          }}</span>
         </div>
         <div>
-          <img src="~/assets/wishlist.svg" alt="bag">
-          <span class="span-count" id="wishlist-counter">{{productsInWishlist.length}}</span>
+          <img src="~/assets/wishlist.svg" alt="bag" />
+          <span id="wishlist-counter" class="span-count">{{
+            productsInWishlist.length
+          }}</span>
         </div>
       </div>
     </nav>
@@ -37,11 +43,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'nuxt-property-decorator';
+import { Component, Vue } from 'nuxt-property-decorator';
 import Minibag from '~/components/MiniBag.vue';
 import { handlingPrice } from '~/utils/helper';
 
-@Component({components: { Minibag }})
+@Component({ components: { Minibag } })
 export default class Layout extends Vue {
   show: boolean = false;
 
@@ -68,7 +74,7 @@ export default class Layout extends Vue {
   &-navbar {
     background-color: #249fe3;
     justify-content: space-between;
-    display: flex!important;
+    display: flex !important;
   }
 
   &-navbar-item {

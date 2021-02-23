@@ -1,7 +1,7 @@
 # jagaad-fe-challenge
 
 Project is hosted here.
-http://narrow-hate.surge.sh/
+http://jagaad-fe.surge.sh/
 
 ## How to run locally
 
@@ -33,7 +33,7 @@ $ docker run -it -p 3000:3000 jagaad-fe
 
 ```
 
-You can see the project running on localhost:3000
+You can see the project running on your localhost:3000 in production mode.
 
 ## How to t
 

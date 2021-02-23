@@ -1,20 +1,28 @@
 <template>
   <section class="section">
-    <b-notification v-model="error" aria-close-label="Error notificaion" type="is-danger">
+    <b-notification
+      v-model="error"
+      aria-close-label="Error notificaion"
+      type="is-danger"
+    >
       Backend Endpoint returns error!
     </b-notification>
     <div v-if="loading">
-      <b-loading :is-full-page="true" v-model="loading"></b-loading>
+      <b-loading v-model="loading" :is-full-page="true"></b-loading>
     </div>
     <div v-else class="columns is-mobile">
-      <div v-for="product in products" :key="product.uuid" class="column is-one-third-widescreen is-half-tablet is-full-mobile" >
+      <div
+        v-for="product in products"
+        :key="product.uuid"
+        class="column is-one-third-widescreen is-half-tablet is-full-mobile"
+      >
         <card :product="product" class="card-component" />
       </div>
     </div>
     <div>
       <b-pagination
-        :total="72"
         v-model="page"
+        :total="72"
         :per-page="6"
         :rounded="true"
         :range-before="1"
@@ -30,7 +38,6 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator';
-import { mapMutations } from 'vuex';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import Card from '~/components/Card.vue';
 import { TProductItem } from '~/types/product.type';
@@ -38,7 +45,7 @@ import { BACKEND_URL, COUNT_PER_PAGE } from '~/utils/constant';
 
 type TAsyncDataParam = { $axios: NuxtAxiosInstance };
 
-@Component({components: { Card }})
+@Component({ components: { Card } })
 export default class HomePage extends Vue {
   page: number = 1;
   loading: boolean = false;
@@ -46,19 +53,21 @@ export default class HomePage extends Vue {
 
   products: Array<TProductItem> = [];
 
-  async asyncData({$axios}: TAsyncDataParam) {
+  async asyncData({ $axios }: TAsyncDataParam) {
     $axios.setHeader('Accept-Language', 'it');
     $axios.setHeader('Content-Type', 'application/json');
     $axios.setHeader('x-musement-currency', 'EUR');
     $axios.setHeader('x-musement-version', '3.4.0');
 
-    const products: Array<TProductItem> = await $axios.$get(`${BACKEND_URL}?limit=${COUNT_PER_PAGE}&offset=0`);
+    const products: Array<TProductItem> = await $axios.$get(
+      `${BACKEND_URL}?limit=${COUNT_PER_PAGE}&offset=0`
+    );
 
     return { products };
   }
 
   @Watch('page')
-  async onPageChanged(value: number, oldValue: string) {
+  async onPageChanged(value: number) {
     this.loading = true;
     this.$axios.setHeader('Accept-Language', 'it');
     this.$axios.setHeader('Content-Type', 'application/json');
@@ -67,7 +76,9 @@ export default class HomePage extends Vue {
 
     const OFFSET = COUNT_PER_PAGE * (value - 1);
     try {
-      const products: Array<TProductItem> = await this.$axios.$get(`${BACKEND_URL}?limit=${COUNT_PER_PAGE}&offset=${OFFSET}`);
+      const products: Array<TProductItem> = await this.$axios.$get(
+        `${BACKEND_URL}?limit=${COUNT_PER_PAGE}&offset=${OFFSET}`
+      );
       this.products = products;
       this.error = false;
     } catch {
@@ -76,9 +87,6 @@ export default class HomePage extends Vue {
     } finally {
       this.loading = false;
     }
-
-
-    console.log(this.products);
   }
 }
 </script>

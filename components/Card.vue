@@ -3,21 +3,34 @@
     <div class="card">
       <div class="card-content">
         <div class="content has-text-centered">
-          <img :src="product.cover_image_url" :alt="product.title">
-          <p class="card-header-title" id="card-title">
-            {{product.title}}
+          <img :src="product.cover_image_url" :alt="product.title" />
+          <p id="card-title" class="card-header-title">
+            {{ product.title }}
           </p>
           <p id="card-description">
-            {{product.description}}
+            {{ product.description }}
           </p>
           <div class="columns is-mobile">
             <div class="column auto"></div>
-            <div v-if="product.discount > 0" class="column stroke-text is-one-third-mobile" id="card-net_price">{{product.original_retail_price.formatted_value}}</div>
-            <div class="column is-one-third-mobile" id="card-retail_price">{{product.retail_price.formatted_value}}</div>
+            <div
+              v-if="product.discount > 0"
+              id="card-net_price"
+              class="column stroke-text is-one-third-mobile"
+            >
+              {{ product.original_retail_price.formatted_value }}
+            </div>
+            <div id="card-retail_price" class="column is-one-third-mobile">
+              {{ product.retail_price.formatted_value }}
+            </div>
             <div class="column auto"></div>
           </div>
         </div>
-        <div v-if="componentMounted" class="add-whilst-wrapper" id="wishlist-wrapper" @click="toggleWishlist(product.uuid)">
+        <div
+          v-if="componentMounted"
+          id="wishlist-wrapper"
+          class="add-whilst-wrapper"
+          @click="toggleWishlist(product.uuid)"
+        >
           <whilst-icon :is-active="productsInWishlist.includes(product.uuid)" />
         </div>
       </div>
@@ -32,13 +45,12 @@
           </b-button>
           <b-button
             v-else
+            id="add-cart-button"
             class="button is-rounded is-fullwidth"
             @click="addProductToBag(product)"
-            id="add-cart-button"
           >
             Add to cart
           </b-button>
-
         </div>
       </footer>
     </div>
@@ -47,7 +59,6 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator';
-import { mapMutations } from 'vuex';
 import WhilstIcon from '~/components/WhilstIcon.vue';
 import { TProductItem } from '~/types/product.type';
 
@@ -64,14 +75,17 @@ const defaultProductInfo = {
     value: 0,
     formatted_value: '$ 0',
   },
-  cover_image_url: ''
+  cover_image_url: '',
 };
 
-@Component({components: { WhilstIcon }})
+@Component({ components: { WhilstIcon } })
 export default class CardComponent extends Vue {
-  @Prop({default() {
-    return defaultProductInfo;
-  }}) product: TProductItem | undefined
+  @Prop({
+    default() {
+      return defaultProductInfo;
+    },
+  })
+  product: TProductItem | undefined;
 
   componentMounted = false; // true once component rendered. used to avoid ssr for specific component like img.
 
@@ -84,7 +98,7 @@ export default class CardComponent extends Vue {
   }
 
   get productsInBags() {
-    return this.$store.state.bag.map((item: {uuid: string}) => item.uuid);
+    return this.$store.state.bag.map((item: { uuid: string }) => item.uuid);
   }
 
   toggleWishlist(uuid: string) {
@@ -97,9 +111,21 @@ export default class CardComponent extends Vue {
 
   addProductToBag(product: TProductItem) {
     if (product.discount > 0) {
-      this.$store.commit('addBag', {uuid: product.uuid, price: product.retail_price.value, title: product.title, img: product.cover_image_url, count: 1});
+      this.$store.commit('addBag', {
+        uuid: product.uuid,
+        price: product.retail_price.value,
+        title: product.title,
+        img: product.cover_image_url,
+        count: 1,
+      });
     } else {
-      this.$store.commit('addBag', {uuid: product.uuid, price: product.original_retail_price.value, title: product.title, img: product.cover_image_url, count: 1});
+      this.$store.commit('addBag', {
+        uuid: product.uuid,
+        price: product.original_retail_price.value,
+        title: product.title,
+        img: product.cover_image_url,
+        count: 1,
+      });
     }
   }
 }
