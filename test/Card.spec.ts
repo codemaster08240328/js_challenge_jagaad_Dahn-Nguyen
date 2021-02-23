@@ -103,7 +103,7 @@ describe('Card Component', () => {
   })
 
   test('add bag function works correctly with zero discount.', () => {
-    const wrapper = shallowMount<CardVueInstance>(Card, {
+    const wrapper = shallowMount<CardVueInstance & any>(Card, {
       store, localVue
     });
 
@@ -114,7 +114,7 @@ describe('Card Component', () => {
   })
 
   test('add bag function works correctly with non-zero discount.', () => {
-    const wrapper = shallowMount<CardVueInstance>(Card, {
+    const wrapper = shallowMount<CardVueInstance & any>(Card, {
       store, localVue
     });
 
@@ -125,7 +125,7 @@ describe('Card Component', () => {
   })
 
   test('toggle wishlist works correctly', () => {
-    const wrapper = shallowMount<CardVueInstance>(Card, {
+    const wrapper = shallowMount<CardVueInstance & any>(Card, {
       store, localVue
     });
 

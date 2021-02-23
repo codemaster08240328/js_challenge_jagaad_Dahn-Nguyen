@@ -15,8 +15,8 @@ type TMockState = {
   cartPrice: number;
 }
 
-interface BagVueInstance extends Vue {
-  removeItemBag: (product: TBagItem) => {}
+interface BagVueInstance extends Vue{
+  removeItemBag: (product: TBagItem) => ({})
 }
 
 describe('Card Component', () => {
@@ -59,7 +59,7 @@ describe('Card Component', () => {
   });
 
   it('mini bag works correctly with remove item', () => {
-    const wrapper = shallowMount<BagVueInstance>(MiniBag, {
+    const wrapper = shallowMount<BagVueInstance & any>(MiniBag, {
       store, localVue
     })
 
