@@ -6,11 +6,11 @@ http://jagaad-fe.surge.sh/
 ## How to run locally
 
 It requires React 15.6.0.
-You can easily install using
+You can easily install it using:
 
-```
-nvm install 15.6.0
-nvm use 15.6.0
+```bash
+$ nvm install 15.6.0
+$ nvm use 15.6.0
 ```
 
 Then run commands in your terminal
@@ -35,16 +35,22 @@ $ docker run -it -p 3000:3000 jagaad-fe
 
 You can see the project running on your localhost:3000 in production mode.
 
-## How to t
+## How to test
 
 1. Unit test
 
-```
+```bash
 $ yarn test
 ```
 
 2. E2E test
 
+```bash
+$ yarn e2e
 ```
-yarn e2e
+
+## How to lint your code
+
+```bash
+$ yarn lint
 ```
