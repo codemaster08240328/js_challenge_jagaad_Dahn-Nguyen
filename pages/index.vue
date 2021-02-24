@@ -19,7 +19,7 @@
         <card :product="product" class="card-component" />
       </div>
     </div>
-    <div>
+    <div style="margin-top: 25px">
       <b-pagination
         v-model="page"
         :total="72"
@@ -82,8 +82,31 @@ export default class HomePage extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .columns {
   flex-wrap: wrap;
+}
+
+// customize Buefy pagination component
+.pagination {
+  display: flex;
+  justify-content: center !important;
+
+  &-previous {
+    order: 1 !important;
+    padding-left: 0.25em !important;
+    padding-right: 0.25em !important;
+  }
+
+  &-next {
+    order: 3 !important;
+    padding-left: 0.25em !important;
+    padding-right: 0.25em !important;
+  }
+
+  &-list {
+    order: 2 !important;
+    flex-grow: 0 !important;
+  }
 }
 </style>
