@@ -14,13 +14,11 @@ describe('Main Page', () => {
 
   it('Add-Wishlsit button works correctly', () => {
     cy.get('#wishlist-wrapper').click();
-
     cy.get('#wishlist-counter').should('have.text', '1');
   })
 
-  it('Add Cart Button works correctly', () => {
+  it('Add-to-Cart Button works correctly', () => {
     cy.get('#add-cart-button').click();
-
     cy.get('#bag-counter').should('have.text', '1')
   })
 })
