@@ -7,21 +7,23 @@
       :class="{ 'even-row': index % 2 }"
     >
       <img :src="`${cart.img}?q=60&fit=crop&w=60&h=60`" alt="" />
-      <div style="margin: 0 5px">
-        <p>
-          <b id="item-title">{{ cart.title }}</b>
-        </p>
-        <p id="item-price">
-          € {{ handlingPrice(cart.price) }} * {{ cart.count }}
-        </p>
-      </div>
-      <div @click="removeItemBag(cart)">
-        <b-icon icon="close" size="is-small" type="is-danger" />
+      <div class="bag-item-content">
+        <div class="bag-item-texts">
+          <div class="bag-item-title">
+            <b id="item-title">{{ cart.title }}</b>
+          </div>
+          <p id="item-price">
+            {{ `${curSign} ${handlingPrice(cart.price)} * ${cart.count}` }}
+          </p>
+        </div>
+        <div @click="removeItemBag(cart)">
+          <b-icon icon="close" size="is-small" type="is-danger" />
+        </div>
       </div>
     </div>
 
     <div id="total-price" class="total-price-wrapper">
-      Total Price: € {{ handlingPrice(cartPrice) }}
+      {{ `Total Price: ${curSign} ${handlingPrice(cartPrice)}` }}
     </div>
   </div>
 </template>
@@ -29,6 +31,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import { handlingPrice } from '~/utils/helper';
+import { CUR_TYPE, CUR_SIGN } from '~/utils/constant';
 
 @Component
 export default class CardComponent extends Vue {
@@ -38,6 +41,10 @@ export default class CardComponent extends Vue {
 
   get cartPrice() {
     return this.$store.state.cartPrice;
+  }
+
+  get curSign() {
+    return CUR_SIGN[CUR_TYPE];
   }
 
   removeItemBag(product: any) {
@@ -65,6 +72,32 @@ export default class CardComponent extends Vue {
   p {
     font-size: 14px;
     line-height: 16px;
+  }
+
+  .bag-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+
+    .bag-item-texts {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 5px 5px;
+
+      .bag-item-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 16px;
+      }
+    }
   }
 }
 

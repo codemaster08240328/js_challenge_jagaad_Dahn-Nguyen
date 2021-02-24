@@ -54,11 +54,6 @@ export default class HomePage extends Vue {
   products: Array<TProductItem> = [];
 
   async asyncData({ $axios }: TAsyncDataParam) {
-    $axios.setHeader('Accept-Language', 'it');
-    $axios.setHeader('Content-Type', 'application/json');
-    $axios.setHeader('x-musement-currency', 'EUR');
-    $axios.setHeader('x-musement-version', '3.4.0');
-
     const products: Array<TProductItem> = await $axios.$get(
       `${BACKEND_URL}?limit=${COUNT_PER_PAGE}&offset=0`
     );
@@ -69,10 +64,6 @@ export default class HomePage extends Vue {
   @Watch('page')
   async onPageChanged(value: number) {
     this.loading = true;
-    this.$axios.setHeader('Accept-Language', 'it');
-    this.$axios.setHeader('Content-Type', 'application/json');
-    this.$axios.setHeader('x-musement-currency', 'EUR');
-    this.$axios.setHeader('x-musement-version', '3.4.0');
 
     const OFFSET = COUNT_PER_PAGE * (value - 1);
     try {

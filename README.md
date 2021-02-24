@@ -5,12 +5,12 @@ http://jagaad-fe.surge.sh/
 
 ## How to run locally
 
-It requires React 15.6.0.
+It requires Node ^12.13.0
 You can easily install it using:
 
 ```bash
-$ nvm install 15.6.0
-$ nvm use 15.6.0
+$ nvm install 12.3.0
+$ nvm use 12.3.0
 ```
 
 Then run commands in your terminal
@@ -23,6 +23,10 @@ $ yarn install
 $ yarn dev
 
 ```
+
+## How to change `CURRENCY TYPE` and `Language`
+
+You can simply change inside `/utils/constants`
 
 ## Production build using Docker.
 

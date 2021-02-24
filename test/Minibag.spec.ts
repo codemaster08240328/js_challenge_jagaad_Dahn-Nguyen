@@ -5,6 +5,7 @@ import Buefy from 'buefy';
 import { handlingPrice } from '~/utils/helper';
 import { TBagItem } from '~/store';
 import expect from 'expect';
+import { CUR_TYPE, CUR_SIGN } from '~/utils/constant';
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -53,8 +54,8 @@ describe('Card Component', () => {
       store, localVue
     });
 
-    expect(wrapper.find('#total-price').text()).toEqual(`Total Price: € ${handlingPrice(store.state.cartPrice)}`);
-    expect(wrapper.find('#item-price').text()).toEqual(`€ ${handlingPrice(store.state.bag[0].price)} * ${store.state.bag[0].count}`);
+    expect(wrapper.find('#total-price').text()).toEqual(`Total Price: ${CUR_SIGN[CUR_TYPE]} ${handlingPrice(store.state.cartPrice)}`);
+    expect(wrapper.find('#item-price').text()).toEqual(`${CUR_SIGN[CUR_TYPE]} ${handlingPrice(store.state.bag[0].price)} * ${store.state.bag[0].count}`);
     expect(wrapper.find('#item-title').text()).toEqual(store.state.bag[0].title);
   });
 

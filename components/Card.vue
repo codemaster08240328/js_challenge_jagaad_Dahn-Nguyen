@@ -2,14 +2,20 @@
   <div class="column">
     <div class="card">
       <div class="card-content">
-        <div class="content has-text-centered">
-          <img :src="product.cover_image_url" :alt="product.title" />
-          <p id="card-title" class="card-header-title">
+        <div class="has-text-centered">
+          <img
+            :src="`${product.cover_image_url}&q=60&fit=crop&h=320`"
+            :alt="product.title"
+          />
+          <div
+            id="card-title"
+            class="card-header-title jagaad-card-header-title"
+          >
             {{ product.title }}
-          </p>
-          <p id="card-description">
+          </div>
+          <div id="card-description" class="jagaad-card-description">
             {{ product.description }}
-          </p>
+          </div>
           <div class="columns is-mobile">
             <div class="column auto"></div>
             <div
@@ -151,6 +157,29 @@ export default class CardComponent extends Vue {
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.jagaad-card {
+  &-header-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 48px;
+    padding: 0 !important;
+    margin: 0.75rem 1rem;
+  }
+
+  &-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 72px;
+    margin-bottom: 20px;
   }
 }
 </style>
