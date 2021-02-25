@@ -8,14 +8,10 @@ type TPluginParams = {
 };
 
 export default function ({ $axios, redirect }: TPluginParams) {
-  $axios.onRequest(config => {
-    config.headers = {
-      'Accept-Language': LANG,
-      'Content-Type': 'application/json',
-      'x-musement-currency': CUR_TYPE,
-      'x-musement-version': API_VERSION
-    }
-  });
+  $axios.setHeader('Accept-Language', LANG);
+  $axios.setHeader('Content-Type', 'application/json');
+  $axios.setHeader('x-musement-currency', CUR_TYPE);
+  $axios.setHeader('x-musement-version', API_VERSION);
 
   $axios.onError((error: AxiosError) => {
     console.log( 'error===>', error);
